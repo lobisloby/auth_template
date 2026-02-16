@@ -130,7 +130,7 @@ export const RegisterForm = () => {
             type='submit'
             className='w-full'
             >
-              Login
+              Create an account
             </Button>
           </form>
         </Form>
