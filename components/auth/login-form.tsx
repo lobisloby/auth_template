@@ -21,12 +21,17 @@ import { Button } from '../ui/button';
 import { login } from '@/actions/login';
 import { useState, useTransition } from 'react';
 import { CheckCircle, XCircle } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
 
 export const LoginForm = () => {
   const [isPending, startTransition] = useTransition();
-  const [error, setError] = useState<string | undefined>("");
+  const [error, setError] = useState<string | undefined>(undefined);
   const [success, setSuccess] = useState<string | undefined>("");
 
+  const searchParams = useSearchParams();
+  const urlError = searchParams.get("error") === 'OAuthAccountNotLinked' ? 'Email alread in use different provider' : "";
+
+  const displayError = error || urlError;
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -40,8 +45,9 @@ export const LoginForm = () => {
     startTransition(()=>{
       login(values)
       .then((data)=>{
-        setError(data.error);
-        setSuccess(data.success);
+        setError(data?.error);
+        // TODO: Add when we add 2FA
+        // setSuccess(data.success);
       })
     })
   }
@@ -95,10 +101,10 @@ export const LoginForm = () => {
                 )}
               />
             </div>
-            {error && (
+            {displayError && (
               <div className="flex items-center gap-2 text-red-600 text-sm border shadow-sm bg-red-200 p-2 rounded-md mb-4">
                 <XCircle className="w-4 h-4" />
-                {error}
+                {displayError}
                 </div>
             )}
             {success && (

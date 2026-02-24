@@ -20,6 +20,18 @@ export const {
      signIn,
      signOut
 } = NextAuth({
+    pages:{
+        signIn: "/auth/login",
+        error: "/auth/login",
+    },
+    events: {
+        async linkAccount({user}){
+            await db.user.update({
+                where:{email: user.email},
+                data:{emailVerified: new Date()}
+            })
+        }
+    },
     callbacks:{
         async session({token,session}){
             if(token.sub && session.user){
