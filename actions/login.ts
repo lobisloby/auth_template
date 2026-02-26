@@ -6,6 +6,10 @@ import { LoginSchema } from "@/schemas";
 import { signIn } from '@/auth';
 import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
 import { AuthError } from 'next-auth';
+import { getUserByEmail } from '@/data/user';
+import { generateVerificationToken } from '@/lib/tokens';
+
+import bcrypt from 'bcrypt'
 
 
 export const login = async (values:z.infer<typeof LoginSchema>)=>{
@@ -16,6 +20,24 @@ export const login = async (values:z.infer<typeof LoginSchema>)=>{
     }
 
     const {email, password } = validatedFields.data;
+
+    const existingUser = await getUserByEmail(email);
+
+    if (!existingUser?.email || !existingUser.password || !existingUser) {
+        return {error: "Email does not exist!"}
+    }
+
+    const passwordMatch = await bcrypt.compare(password, existingUser.password);
+
+    if (!passwordMatch) {
+        return { error: "Invalid credentials!" }
+    }
+
+    if (!existingUser.emailVerified) {
+        const verificationToken = await generateVerificationToken(existingUser.email);
+
+        return {success: "Confirmation email sent!"}
+    }
 
     try {
         await signIn("credentials",{

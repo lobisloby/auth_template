@@ -26,7 +26,7 @@ import { useSearchParams } from 'next/navigation';
 export const LoginForm = () => {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>(undefined);
-  const [success, setSuccess] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>(undefined);
 
   const searchParams = useSearchParams();
   const urlError = searchParams.get("error") === 'OAuthAccountNotLinked' ? 'Email alread in use different provider' : "";
@@ -47,7 +47,7 @@ export const LoginForm = () => {
       .then((data)=>{
         setError(data?.error);
         // TODO: Add when we add 2FA
-        // setSuccess(data.success);
+        setSuccess(data.success);
       })
     })
   }
