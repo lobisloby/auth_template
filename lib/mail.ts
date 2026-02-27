@@ -11,12 +11,12 @@ export const sendVerificationEmail = async (
     const confirmLink = `http://localhost:3000/auth/new-verification?token=${token}`
 
     await resend.emails.send({
-        from:"oit6egkm83@dollicons.com",
+        from:"onboarding@resend.dev",
         to:email,
         subject:"Confirmation your email",
         html:`
             <p>Thank you! Your request has been successfully received.</p>
-            <p>Please confirm your action by clicking <a href="${confirmLink} ">here</a>.</p>
+            <p>Please confirm your action by clicking <a href="${confirmLink}">here</a>.</p>
         `
     })
 }
