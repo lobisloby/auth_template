@@ -1,6 +1,8 @@
+import { NewPasswordForm } from "@/components/auth/new-password-form"
+
 const NewPassword = () => {
   return (
-    <div>NewPassword</div>
+    <NewPasswordForm/>
   )
 }
 export default NewPassword
