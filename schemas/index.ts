@@ -17,3 +17,8 @@ export const RegisterSchema = z.object({
         message:"Name must not be empty" ,  
     })
 })
+
+
+export const ResetSchema = z.object({
+    email: z.string().email({message:"Invalid Email Address"}),
+})

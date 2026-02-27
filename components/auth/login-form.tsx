@@ -22,6 +22,7 @@ import { login } from '@/actions/login';
 import { useState, useTransition } from 'react';
 import { CheckCircle, XCircle } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 export const LoginForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -96,6 +97,17 @@ export const LoginForm = () => {
                         placeholder='******'
                       />
                     </FormControl>
+                    <Button 
+                      size="sm"
+                      variant="link"
+                      asChild
+                      className='px-1 justify-baseline font-normal'
+
+                    >
+                      <Link href="/auth/reset">
+                        Forgot password
+                      </Link>
+                    </Button>
                     <FormMessage/>
                   </FormItem>
                 )}
