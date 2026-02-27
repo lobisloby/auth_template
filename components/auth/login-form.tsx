@@ -47,7 +47,7 @@ export const LoginForm = () => {
       .then((data)=>{
         setError(data?.error);
         // TODO: Add when we add 2FA
-        setSuccess(data.success);
+        setSuccess(data?.success);
       })
     })
   }
@@ -108,7 +108,7 @@ export const LoginForm = () => {
                 </div>
             )}
             {success && (
-              <div className="flex items-center gap-2 text-green-600 text-smborder shadow-sm bg-green-200 p-2 rounded-md mb-4">
+              <div className="flex items-center gap-2 text-green-600 text-sm border shadow-sm bg-green-200 p-2 rounded-md mb-4">
                 <CheckCircle className="w-4 h-4" />
                 {success}
                 </div>
