@@ -7,7 +7,7 @@ import { BiExit } from "react-icons/bi"
 
 export const UserButton = () => {
     const user = useCurrentUser()
-    console.log(user)
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
