@@ -1,6 +1,7 @@
 "use client"
 
 import { logout } from "@/actions/logout";
+import { usePathname } from "next/navigation";
 
 
 interface LogoutButtonProps {
@@ -10,8 +11,10 @@ interface LogoutButtonProps {
 export const LogoutButton=({
     children
 }:LogoutButtonProps)=>{
-    const onClick = ()=>{
-        logout();
+    const pathname = usePathname()
+
+    const onClick = () => {
+        logout(pathname)
     }
 
     return (

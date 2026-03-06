@@ -5,10 +5,14 @@ import { Button } from "../ui/button"
 import { BsGithub } from "react-icons/bs"
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes"
 import { signIn } from "next-auth/react"
+import { useSearchParams } from "next/navigation"
 
 export const Social = () => {
+  const searchPrams = useSearchParams();
+  const callbackUrl = searchPrams.get("callbackUrl")
   const onClick = (provider:'github'|'google')=>{
-    signIn(provider, {redirectTo:DEFAULT_LOGIN_REDIRECT})
+    signIn(provider, 
+      {redirectTo:callbackUrl ||DEFAULT_LOGIN_REDIRECT})
   }
   
  return (

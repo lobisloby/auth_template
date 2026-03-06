@@ -30,7 +30,7 @@ export default function Home() {
             A simple authentication page. Please log in to continue
           </p>
           <div>
-            <LoginButton >
+            <LoginButton mode="model" asChild>
               <Button variant={"secondary"} size={"lg"}>
                 Sign in
               </Button>
