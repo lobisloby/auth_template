@@ -11,7 +11,7 @@ const ProtectedLayout = (
     return (
         <div
           className="
-            bg-[radial-gradient(ellipse_at_top,#38bdf8_0%,#1e3a8a_100%)] h-full w-full flex flex-col gap-y-10 items-center justify-center
+            bg-[radial-gradient(ellipse_at_top,#38bdf8_0%,#1e3a8a_100%)] h-full w-full flex flex-col gap-y-2 items-center justify-center
           "
         >
           <Navbar/>

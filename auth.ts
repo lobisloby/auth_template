@@ -5,6 +5,7 @@ import { db } from "./lib/db"
 import { getUserById } from "./data/user"
 import { UserRole } from "@prisma/client"
 import { getTwoFactorConfirmationByUserId } from "./data/two-factor-confirmation"
+import { getAccountByUserId } from "./data/account"
 
 
 declare module "next-auth" {
@@ -12,6 +13,7 @@ declare module "next-auth" {
     user: {
         role: UserRole
         isTwoFactorEnabled: boolean
+        isOAuth: boolean
     } & DefaultSession["user"]
   }
 }
@@ -20,6 +22,7 @@ declare module "@auth/core/jwt" {
   interface JWT {
     role?: UserRole
     isTwoFactorEnabled?: boolean
+    isOAuth: boolean
   }
 }
  
@@ -77,15 +80,28 @@ export const {
             if(session.user){
                 session.user.isTwoFactorEnabled= token.isTwoFactorEnabled as boolean;
             }
+
+            if(session.user){
+                session.user.name = token.name;
+                session.user.email= token.email ?? "";
+                session.user.isOAuth = token.isOAuth as boolean;
+            }
+
             return session
         },
         async jwt({token}){
+            console.log("I'M BING CALLED AGAIN")
             if(!token.sub) return token;
             
             const existingUser = await getUserById(token.sub)
 
             if(!existingUser) return token
 
+            const existingAccount = await getAccountByUserId(existingUser.id)
+            
+            token.isOAuth = !!existingAccount;
+            token.email = existingUser.email;
+            token.name= existingUser.name;
             token.role = existingUser.role;
             token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
             
