@@ -1,37 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Here is the updated Markdown. I have shifted the focus to a **custom-built authentication architecture**, highlighting the core security principles like JWT management, middleware protection, and secure session handling.
 
-## Getting Started
+<div align="center">
 
-First, run the development server:
+# 🔐 NextAuth Shield
 
+A modern, high-performance authentication architecture built with **Next.js 15**, **TypeScript**, and **Jose/JWT**.
+
+Designed as a lightweight, flexible foundation for secure user management and route protection.
+
+<br />
+
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Security](https://img.shields.io/badge/Auth-Custom--Logic-green?style=flat-square)](https://nextjs.org/docs/app/building-your-application/authentication)
+
+</div>
+
+---
+
+## 🚀 Overview
+
+This project implements a custom authentication flow using **Next.js Server Actions** and **Middleware**. It avoids external providers to give you full control over your user data, session persistence, and security headers.
+
+## ✨ Key Features
+
+- 🛡️ **Middleware Protection** – Centralized logic to secure private routes and handle redirects.
+- 🍪 **Secure Session Management** – HttpOnly, Secure, and SameSite cookie implementation for JWTs.
+- ⚡ **Server Actions Auth** – Modern, type-safe login and registration flows without traditional API bloat.
+- 🔒 **Password Hashing** – Industry-standard encryption (Argon2/Bcrypt) for user credentials.
+- 📱 **Responsive UI** – Minimalist, accessible forms optimized for all device types.
+
+---
+
+## 🛠️ Getting Started
+
+```
+### 2. Environment Configuration
+Create a .env.local file in the root directory:
+```env
+AUTH_SECRET=your_super_secret_jwt_key_here
+DATABASE_URL=your_database_connection_string
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+
+```
+### 3. Run Development Server
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+```
+Open http://localhost:3000 to explore the authentication flow.
+## 🏗️ Core Architecture
+ * **lib/auth.ts**: Contains the logic for signing, verifying, and refreshing session tokens.
+ * **middleware.ts**: The gatekeeper that intercepts requests to ensure only authenticated users access /dashboard or /profile.
+ * **app/(auth)/**: A dedicated route group for clean, organized Sign-in and Sign-up logic.
+## 🚢 Deployment
+Optimized for deployment on **Vercel** with full support for Edge Runtime and Serverless Functions.
+ 1. Ensure all environment variables are set in your Vercel Dashboard.
+ 2. The middleware.ts handles global protection even on the edge.
+<div align="center">
+Built for developers who value total control and data privacy.
+</div>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-use clerck for avoid wasting time 
+```
