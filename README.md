@@ -49,11 +49,11 @@ npm run dev
 
 ```
 Open http://localhost:3000 to explore the authentication flow.
-## 🏗️ Core Architecture
+##  Core Architecture
  * **lib/auth.ts**: Contains the logic for signing, verifying, and refreshing session tokens.
  * **middleware.ts**: The gatekeeper that intercepts requests to ensure only authenticated users access /dashboard or /profile.
  * **app/(auth)/**: A dedicated route group for clean, organized Sign-in and Sign-up logic.
-## 🚢 Deployment
+##  Deployment
 Optimized for deployment on **Vercel** with full support for Edge Runtime and Serverless Functions.
  1. Ensure all environment variables are set in your Vercel Dashboard.
  2. The middleware.ts handles global protection even on the edge.
